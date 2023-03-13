@@ -44,6 +44,7 @@ spec:
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
+        branchName: ${{ parameters.project }}-project
 
     # - id: pull-request
     #   name: make a pr with the new namespaces
