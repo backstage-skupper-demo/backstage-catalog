@@ -34,9 +34,9 @@ spec:
       action: publish:github:pull-request
       input:
         repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
-        branchName: ${{ parameters.sitename }}
-        title: skupper for ${{ parameters.sitename }}
-        description: skupper for ${{ parameters.sitename }}
+        branchName: ${{ parameters.project }}-project
+        title: Create OpenShift Project ${{ parameters.project }}
+        description: Create OpenShift Project ${{ parameters.project }}
 
     - id: register
       name: Register
@@ -44,7 +44,6 @@ spec:
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
-        branchName: ${{ parameters.project }}-project
 
     # - id: pull-request
     #   name: make a pr with the new namespaces
