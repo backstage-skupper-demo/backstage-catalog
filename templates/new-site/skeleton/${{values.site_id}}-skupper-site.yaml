@@ -1,0 +1,15 @@
+all:
+  children:
+    local:
+      hosts:
+        ${{values.sitename}}:
+          ansible_connection: local
+          namespace: ${{values.project}}
+          init:
+            siteName: ${{values.sitename}}
+          links:
+            - host: ${{values.linkedsite}}
+    linked:
+      hosts:
+        ${{values.linkedsite}}:
+          ansible_connection: local
