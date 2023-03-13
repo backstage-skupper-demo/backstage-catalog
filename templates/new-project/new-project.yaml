@@ -29,12 +29,12 @@ spec:
         values:
           project: ${{ parameters.project }}
 
-    # - id: publish
-    #   name: Publish
-    #   action: publish:github:push
-    #   input:
-    #     branch: master
-    #     repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
+    - id: publish
+      name: Publish
+      action: publish:github:push
+      input:
+        branch: master
+        repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
 
     # - id: register
     #   name: Register
