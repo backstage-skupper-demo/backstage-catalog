@@ -7,9 +7,13 @@ all:
           namespace: ${{values.project}}
           init:
             siteName: ${{values.sitename}}
+          {% if values.linkedsite %}
           links:
             - host: ${{values.linkedsite}}
+          {% endif %}
+    {% if values.linkedsite %}
     linked:
       hosts:
         ${{values.linkedsite}}:
           ansible_connection: local
+    {% endif %}
