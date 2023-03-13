@@ -29,7 +29,7 @@ spec:
         values:
           project: ${{ parameters.project }}
 
-    - id: pull-request
+    - id: pr
       name: make a pr with the new namespaces
       action: publish:github:pull-request
       input:
@@ -42,7 +42,7 @@ spec:
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        repoContentsUrl: ${{ steps.pr.output.repoContentsUrl }}
         catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
 
     # - id: pull-request
