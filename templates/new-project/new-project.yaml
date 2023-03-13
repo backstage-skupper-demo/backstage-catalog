@@ -43,7 +43,7 @@ spec:
       action: catalog:register
       input:
         repoContentsUrl: https://github.com/backstage-skupper-demo/project-repo
-        catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
+        catalogInfoPath: "/catalog/${{parameters.project}}-project.yaml"
 
     # - id: pull-request
     #   name: make a pr with the new namespaces
