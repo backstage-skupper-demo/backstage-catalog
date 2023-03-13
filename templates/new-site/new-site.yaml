@@ -15,7 +15,6 @@ spec:
       required:
         - project
         - sitename
-        - linkedsite
       properties:
         project:
           title: Project
