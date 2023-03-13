@@ -34,7 +34,7 @@ spec:
       action: publish:github:push
       input:
         branch: master
-        repoUrl: https://github.com/backstage-skupper-demo/project-repo
+        repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
 
     - id: register
       name: Register
