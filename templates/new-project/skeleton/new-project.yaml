@@ -31,10 +31,9 @@ spec:
 
     - id: publish
       name: Publish
-      action: publish:github
+      action: publish:github:push
       input:
-        allowedHosts: ['github.com']
-        description: This is ${{ parameters.project }}
+        branch: master
         repoUrl: https://github.com/backstage-skupper-demo/project-repo
 
     - id: register
