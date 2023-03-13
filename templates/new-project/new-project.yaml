@@ -29,19 +29,21 @@ spec:
         values:
           project: ${{ parameters.project }}
 
-    - id: publish
-      name: Publish
-      action: publish:github:push
+    - id: pull-request
+      name: make a pr with the new namespaces
+      action: publish:github:pull-request
       input:
-        branch: master
         repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
+        branchName: ${{ parameters.sitename }}
+        title: skupper for ${{ parameters.sitename }}
+        description: skupper for ${{ parameters.sitename }}
 
-    # - id: register
-    #   name: Register
-    #   action: catalog:register
-    #   input:
-    #     repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-    #     catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
 
     # - id: pull-request
     #   name: make a pr with the new namespaces
