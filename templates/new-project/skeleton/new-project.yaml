@@ -1,0 +1,55 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: openshift-project
+  title: OpenShift Project
+  description: An OpenShift project to host applications
+  tags:
+    - openshift
+spec:
+  owner: service@example.com
+  type: system
+  
+  parameters:
+    - title: Provide information on this application
+      required:
+        - project
+      properties:
+        project:
+          title: Project
+          type: string
+          description: The name for the OpenShift project
+  steps:
+    - id: template-namespaces 
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutRender: []
+        values:
+          project: ${{ parameters.project }}
+
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.project }}
+        repoUrl: https://github.com/backstage-skupper-demo/project-repo
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
+
+    # - id: pull-request
+    #   name: make a pr with the new namespaces
+    #   action: publish:github:pull-request
+    #   input:
+    #     repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
+    #     branchName: ${{ parameters.sitename }}
+    #     title: skupper for ${{ parameters.sitename }}
+    #     description: skupper for ${{ parameters.sitename }}
+        
