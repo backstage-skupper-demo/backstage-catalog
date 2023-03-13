@@ -42,7 +42,7 @@ spec:
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps.pr.output.repoContentsUrl }}
+        repoContentsUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
         catalogInfoPath: "/catalog/${{values.project}}-project.yaml"
 
     # - id: pull-request
