@@ -22,8 +22,11 @@ spec:
           description: The target OpenShift project
           ui:field: OwnedEntityPicker
           ui:options:
-            allowedKinds:
-            - Component
+            catalogFilter:
+              - kind:
+                  - Component
+              - type:
+                  - ocp-project
         sitename:
           title: Site Name
           type: string
