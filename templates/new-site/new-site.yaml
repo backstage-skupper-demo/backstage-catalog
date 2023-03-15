@@ -23,8 +23,6 @@ spec:
           ui:field: OwnedEntityPicker
           ui:options:
             catalogFilter:
-              - kind:
-                  - Component
               - 'spec.type':
                   - ocp-project
         sitename:
@@ -38,8 +36,6 @@ spec:
           ui:field: OwnedEntityPicker
           ui:options:
             catalogFilter:
-              - kind:
-                  - Component
               - 'spec.type':
                   - skupper-site
   steps:
