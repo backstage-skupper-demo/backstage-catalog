@@ -35,6 +35,13 @@ spec:
           title: Linked Site
           type: string
           description: Site name to link to
+          ui:field: OwnedEntityPicker
+          ui:options:
+            catalogFilter:
+              - kind:
+                  - Component
+              - 'spec.type':
+                  - skupper-site
   steps:
     - id: template-namespaces 
       name: Fetch Skeleton + Template
