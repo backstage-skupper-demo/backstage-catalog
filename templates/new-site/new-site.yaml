@@ -23,7 +23,7 @@ spec:
           ui:field: OwnedEntityPicker
           ui:options:
             allowedKinds:
-            - ocp-project
+            - Component
         sitename:
           title: Site Name
           type: string
