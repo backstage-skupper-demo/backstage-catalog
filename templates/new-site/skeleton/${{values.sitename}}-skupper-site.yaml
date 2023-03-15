@@ -4,7 +4,7 @@ all:
       hosts:
         ${{values.sitename}}:
           ansible_connection: local
-          namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/, '')}}
+          namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
           init:
             siteName: ${{values.sitename}}
           {% if values.linkedsite %}
