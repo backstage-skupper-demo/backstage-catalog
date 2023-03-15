@@ -9,11 +9,11 @@ all:
             siteName: ${{values.sitename}}
           {% if values.linkedsite %}
           links:
-            - host: ${{values.linkedsite}}
+            - host: ${{values.linkedsite.replaceAll('component:default/','')}}
           {% endif %}
     {% if values.linkedsite %}
     linked:
       hosts:
-        ${{values.linkedsite}}:
+        ${{values.linkedsite.replaceAll('component:default/','')}}:
           ansible_connection: local
     {% endif %}
