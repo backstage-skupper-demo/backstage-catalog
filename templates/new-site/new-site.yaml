@@ -20,6 +20,10 @@ spec:
           title: Project
           type: string
           description: The target OpenShift project
+          ui:field: OwnedEntityPicker
+          ui:options:
+            allowedKinds:
+            - ocp-project
         sitename:
           title: Site Name
           type: string
