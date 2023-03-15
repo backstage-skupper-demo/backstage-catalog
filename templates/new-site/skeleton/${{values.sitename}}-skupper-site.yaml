@@ -9,11 +9,11 @@ all:
             siteName: ${{values.sitename}}
           {% if values.linkedsite %}
           links:
-            - host: ${{values.linkedsite.replaceAll('component:default/','')}}
+            - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
           {% endif %}
     {% if values.linkedsite %}
     linked:
       hosts:
-        ${{values.linkedsite.replaceAll('component:default/','')}}:
+        ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}:
           ansible_connection: local
     {% endif %}
