@@ -24,7 +24,7 @@ spec:
           ui:options:
             catalogFilter:
               - kind:
-                  - Component
+                  - System
               - 'spec.type':
                   - ocp-project
         sitename:
