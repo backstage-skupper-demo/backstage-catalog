@@ -1,0 +1,58 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: deployment
+  title: Pod Deployment
+  description: A kubernetes pod deployment
+  tags:
+    - deployment
+    - pod
+spec:
+  owner: service@example.com
+  type: system
+  
+  parameters:
+    - title: Provide information on this application
+      required:
+        - project
+        - name
+        - image
+      properties:
+        project:
+          title: Project
+          type: string
+          description: The target OpenShift project
+          ui:field: OwnedEntityPicker
+          ui:options:
+            catalogFilter:
+              - 'spec.type':
+                  - ocp-project
+        sitename:
+          title: Name
+          type: string
+          description: The name of the kube deployment
+        image:
+          title: Container Image
+          type: string
+          description: The location of the container image
+  steps:
+    - id: template-namespaces 
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutRender: []
+        values:
+          project: ${{ parameters.project }}
+          sitename: ${{ parameters.sitename }}
+          linkedsite: ${{ parameters.linkedsite }}
+
+    - id: pull-request
+      name: make a pr with the new namespaces
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
+        branchName: ${{ parameters.sitename }}
+        title: skupper for ${{ parameters.sitename }}
+        description: skupper for ${{ parameters.sitename }}
+        
