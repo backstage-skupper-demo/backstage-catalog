@@ -1,0 +1,31 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
+  name: ${{values.name}}
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: ${{values.deployment.replaceAll('component:default/','').replaceAll(r/-deployment$/g, '')}}
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
+  name: ${{values.name}}
+  annotations: {}
+spec:
+  to:
+    kind: Service
+    name: ${{values.name}}
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: ''
+    destinationCACertificate: ''
+  path: /
+  port:
+    targetPort: 8080
