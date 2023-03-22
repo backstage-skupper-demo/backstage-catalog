@@ -1,0 +1,43 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ${{values.sitename}}-inventory
+  namespace: backstage
+data:
+  inventory.yml: |
+    all:
+      children:
+        local:
+          hosts:
+            ${{values.sitename}}:
+              ansible_connection: local
+              namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
+              init:
+                siteName: ${{values.sitename}}
+              {% if values.linkedsite %}
+              links:
+                - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
+              {% endif %}
+        {% if values.linkedsite %}
+        linked:
+          hosts:
+            ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}:
+              ansible_connection: local
+        {% endif %}
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: ${{values.sitename}}-skupper-site
+  namespace: backstage
+  labels:
+    tekton.dev/pipeline: new-pipeline
+spec:
+  pipelineRef:
+    name: skupper-site-pipeline
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+    - configMap:
+        name: ${{values.sitename}}-inventory
+      name: source
