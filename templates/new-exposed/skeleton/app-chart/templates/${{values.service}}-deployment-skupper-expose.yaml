@@ -1,0 +1,64 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ${{values.service}}-deployment-expose-inventory
+  namespace: backstage
+data:
+  inventory.yml: |
+    all:
+      children:
+        local:
+          hosts:
+            ${{values.sitename}}:
+              ansible_connection: local
+              namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
+              services:
+                ${{values.service}}:
+                  ports:
+                    - 8080
+                  targets:
+                    - type: "deployment"
+                      name: ${{values.deployment.replaceAll('component:default/','').replaceAll(r/-deployment$/g, '')}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ${{values.service}}-deployment-expose
+  namespace: backstage
+spec:
+  selector: {}
+  template:
+    metadata:
+      name: ${{values.service}}-deployment-expose
+    spec:
+      serviceAccountName: pipeline
+      containers:
+        - name: skupper-ansible
+          image: quay.io/mathianasj/ansible-skupper-pipeline@sha256:90d149f6907666b53dd33fe2f961c54353f7157522b1e3b132798d01c35e55c0
+          command:
+            - ansible-playbook
+            - /site-creation.yaml
+            - -i
+            - /workspace/source/inventory.yml
+            - -e
+            - vault_url=$(VAULT_URL)
+          volumeMounts:
+            - name: inventory
+              mountPath: /workspace/source
+          env:
+            - name: VAULT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vault-secret
+                  key: vault-url
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault-secret
+                  key: vault-token
+      volumes:
+      - name: inventory
+        configMap:
+          name: ${{values.service}}-deployment-expose-inventory
+          defaultMode: 420
+      restartPolicy: Never
