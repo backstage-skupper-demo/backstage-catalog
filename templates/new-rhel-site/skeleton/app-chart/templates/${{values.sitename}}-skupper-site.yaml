@@ -1,0 +1,68 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ${{values.sitename}}-inventory
+  namespace: backstage
+data:
+  inventory.yml: |
+    all:
+      children:
+        local:
+          hosts:
+            ${{values.sitename}}:
+              platform: "podman"
+              init:
+                siteName: ${{values.sitename}}
+              {% if values.linkedsite %}
+              links:
+                - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
+              {% endif %}
+        {% if values.linkedsite %}
+        linked:
+          hosts:
+            ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}:
+              ansible_connection: local
+        {% endif %}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ${{values.sitename}}-skupper-site-init
+  namespace: backstage
+spec:
+  selector: {}
+  template:
+    metadata:
+      name: ${{values.sitename}}-skupper-site-init
+    spec:
+      serviceAccountName: pipeline
+      containers:
+        - name: skupper-ansible
+          image: quay.io/mathianasj/ansible-skupper-pipeline@sha256:90d149f6907666b53dd33fe2f961c54353f7157522b1e3b132798d01c35e55c0
+          command:
+            - ansible-playbook
+            - /site-creation.yaml
+            - -i
+            - /workspace/source/inventory.yml
+            - -e
+            - vault_url=$(VAULT_URL)
+          volumeMounts:
+            - name: inventory
+              mountPath: /workspace/source
+          env:
+            - name: VAULT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: vault-secret
+                  key: vault-url
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault-secret
+                  key: vault-token
+      volumes:
+      - name: inventory
+        configMap:
+          name: ${{values.sitename}}-inventory
+          defaultMode: 420
+      restartPolicy: Never

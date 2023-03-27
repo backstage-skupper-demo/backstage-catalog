@@ -1,0 +1,56 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: skupper-rhel-site
+  title: RHEL Skupper Site
+  description: An skupper site that can be linked to others
+  tags:
+    - skupper
+spec:
+  owner: service@example.com
+  type: system
+  
+  parameters:
+    - title: Provide information on this application
+      required:
+        - host
+        - sitename
+      properties:
+        host:
+          title: Host
+          type: string
+          description: The target RHEL Host IP/DNS Name
+        sitename:
+          title: Site Name
+          type: string
+          description: The name for the skupper site.
+        linkedsite:
+          title: Linked Site
+          type: string
+          description: Site name to link to
+          ui:field: OwnedEntityPicker
+          ui:options:
+            catalogFilter:
+              - 'spec.type':
+                  - skupper-site
+  steps:
+    - id: template-namespaces 
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutRender: []
+        values:
+          host: ${{ parameters.host }}
+          sitename: ${{ parameters.sitename }}
+          linkedsite: ${{ parameters.linkedsite }}
+
+    - id: pull-request
+      name: make a pr with the new namespaces
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
+        branchName: ${{ parameters.sitename }}
+        title: skupper for ${{ parameters.sitename }}
+        description: skupper for ${{ parameters.sitename }}
+        
