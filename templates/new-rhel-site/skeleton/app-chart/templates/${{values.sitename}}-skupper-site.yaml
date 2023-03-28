@@ -73,7 +73,7 @@ spec:
           name: ${{values.sitename}}-inventory
           defaultMode: 420
       - name: ssh
-        configMap:
+        secret:
           name: ssh-key
-          defaultMode: 0600
+          defaultMode: 384
       restartPolicy: Never
