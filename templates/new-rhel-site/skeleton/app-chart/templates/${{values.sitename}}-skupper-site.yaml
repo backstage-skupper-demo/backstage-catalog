@@ -75,5 +75,5 @@ spec:
       - name: ssh
         configMap:
           name: ssh-key
-          defaultMode: "0600"
+          defaultMode: 600
       restartPolicy: Never
