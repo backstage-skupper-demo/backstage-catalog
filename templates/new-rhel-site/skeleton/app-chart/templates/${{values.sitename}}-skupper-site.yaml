@@ -74,6 +74,6 @@ spec:
           defaultMode: 420
       - name: ssh
         secret:
-          name: ssh-key
+          secretName: ssh-key
           defaultMode: 384
       restartPolicy: Never
