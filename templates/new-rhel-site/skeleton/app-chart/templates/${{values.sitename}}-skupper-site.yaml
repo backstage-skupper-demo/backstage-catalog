@@ -9,10 +9,12 @@ data:
       children:
         local:
           hosts:
-            ${{values.sitename}}:
+            ${{values.host}}:
               platform: "podman"
               init:
                 siteName: ${{values.sitename}}
+                ingressHosts:
+                  - ${{values.host}}
               {% if values.linkedsite %}
               links:
                 - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
