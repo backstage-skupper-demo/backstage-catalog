@@ -34,7 +34,7 @@ spec:
       serviceAccountName: pipeline
       containers:
         - name: skupper-ansible
-          image: quay.io/mathianasj/ansible-skupper-pipeline@sha256:90d149f6907666b53dd33fe2f961c54353f7157522b1e3b132798d01c35e55c0
+          image: quay.io/mathianasj/ansible-skupper-pipeline@sha256:9ae7e91a7e65b29038435c804e5dc5d9161b337aba5fbb3d1b2f95c8a1cbce62
           command:
             - ansible-playbook
             - /site-creation.yaml
