@@ -53,7 +53,8 @@ spec:
             - name: inventory
               mountPath: /workspace/source
             - name: ssh
-              mountPath: /workspace/.ssh
+              mountPath: /workspace/.ssh/id_rsa
+              subPath: id_rsa
           env:
             - name: ANSIBLE_HOST_KEY_CHECKING
               value: "False"
