@@ -14,6 +14,8 @@ data:
               namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
               init:
                 siteName: ${{values.sitename}}
+                enableServiceSync: True
+                enableConsole: True
               {% if values.linkedsite %}
               links:
                 - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}

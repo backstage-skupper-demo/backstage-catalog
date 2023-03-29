@@ -15,6 +15,7 @@ data:
                 siteName: ${{values.sitename}}
                 ingressHosts:
                   - ${{values.host}}
+                enableServiceSync: True
               {% if values.linkedsite %}
               links:
                 - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
