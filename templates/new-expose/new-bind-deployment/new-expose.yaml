@@ -1,0 +1,67 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: skupper-exposed-deployment
+  title: Expose Skupper RHEL Service
+  description: Create a service in openshift that exposes rhel bound skupper services
+  tags:
+    - skupper
+spec:
+  owner: service@example.com
+  type: system
+  
+  parameters:
+    - title: Provide information on this application
+      required:
+        - service
+        - project
+        - site
+        - port
+      properties:
+        service:
+          title: Service Name
+          type: string
+          description: The name for the exposed service
+        port:
+          title: Service Port
+          type: string
+          description: The port number for the service
+        project:
+          title: Project
+          type: string
+          description: The target OpenShift project
+          ui:field: OwnedEntityPicker
+          ui:options:
+            catalogFilter:
+              - 'spec.type':
+                  - ocp-project
+        site:
+          title: Skupper Site
+          type: string
+          description: The name for the skupper site.
+          ui:field: OwnedEntityPicker
+          ui:options:
+            catalogFilter:
+              - 'spec.type':
+                  - skupper-site
+  steps:
+    - id: template-namespaces 
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutRender: []
+        values:
+          project: ${{ parameters.project }}
+          service: ${{ parameters.service }}
+          site: ${{ parameters.site }}
+          port: ${{ parameters.port }}
+    - id: pull-request
+      name: make a pr with the new namespaces
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
+        branchName: ${{ parameters.service }}
+        title: skupper for ${{ parameters.service }}
+        description: skupper for ${{ parameters.service }}
+        
