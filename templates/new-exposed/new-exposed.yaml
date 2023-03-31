@@ -58,15 +58,16 @@ spec:
         copyWithoutRender: []
         values:
           project: ${{ parameters.project }}
-          sitename: ${{ parameters.sitename }}
-          linkedsite: ${{ parameters.linkedsite }}
+          service: ${{ parameters.service }}
+          site: ${{ parameters.site }}
+          deployment: ${{ parameters.deployment }}
 
     - id: pull-request
       name: make a pr with the new namespaces
       action: publish:github:pull-request
       input:
         repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
-        branchName: ${{ parameters.sitename }}
-        title: skupper for ${{ parameters.sitename }}
-        description: skupper for ${{ parameters.sitename }}
+        branchName: ${{ parameters.service }}
+        title: skupper for ${{ parameters.service }}
+        description: skupper for ${{ parameters.service }}
         
