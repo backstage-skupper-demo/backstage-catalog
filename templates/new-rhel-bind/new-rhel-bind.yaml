@@ -38,15 +38,15 @@ spec:
         copyWithoutRender: []
         values:
           host: ${{ parameters.host }}
-          sitename: ${{ parameters.sitename }}
-          linkedsite: ${{ parameters.linkedsite }}
+          service: ${{ parameters.service }}
+          port: ${{ parameters.port }}
 
     - id: pull-request
       name: make a pr with the new namespaces
       action: publish:github:pull-request
       input:
         repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
-        branchName: ${{ parameters.sitename }}
-        title: skupper for ${{ parameters.sitename }}
-        description: skupper for ${{ parameters.sitename }}
+        branchName: ${{ parameters.service }}-rhel-bind
+        title: skupper for ${{ parameters.service }}-rhel-bind
+        description: skupper for ${{ parameters.service }}-rhel-bind
         
