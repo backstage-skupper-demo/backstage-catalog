@@ -2,8 +2,8 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: skupper-exposed-deployment
-  title: Expose Deployment
-  description: Expose an OpenShift deployment in the skupper network
+  title: Bind Deployment to Skupper
+  description: Bind an OpenShift deployment in the skupper network and create a new service
   tags:
     - skupper
 spec:
