@@ -12,6 +12,8 @@ data:
             ${{values.sitename}}:
               ansible_connection: local
               namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
+              token:
+                type: cert
               init:
                 siteName: ${{values.sitename}}
                 enableServiceSync: True
