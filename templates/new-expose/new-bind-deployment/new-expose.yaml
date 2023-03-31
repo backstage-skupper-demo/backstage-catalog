@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: skupper-exposed-deployment
+  name: skupper-expose-rhel-service
   title: Expose Skupper RHEL Service
   description: Create a service in openshift that exposes rhel bound skupper services
   tags:
