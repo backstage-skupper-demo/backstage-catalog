@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: skupper-rhel-site
-  title: RHEL Skupper Site
-  description: An skupper site that can be linked to others
+  name: skupper-rhel-bind
+  title: RHEL Bind Skupper Service
+  description: Bind a rhel host port to a skupper service
   tags:
     - skupper
 spec:
