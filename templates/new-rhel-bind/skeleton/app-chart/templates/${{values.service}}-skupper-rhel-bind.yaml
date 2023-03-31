@@ -18,9 +18,6 @@ data:
                   targets:
                     - type: "host"
                       name: "${{values.host}}"
-                  hostIp: "${{value.host}}"
-                  hostPorts:
-                    - ${{values.port}}:${{values.port}}
           vars:
             ansible_user: cloud-user
 ---
