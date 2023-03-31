@@ -17,7 +17,8 @@ data:
               init:
                 siteName: ${{values.sitename}}
                 enableServiceSync: 'true'
-                # enableConsole: True
+                enableConsole: 'true'
+                enableFlowCollector: 'true'
               {% if values.linkedsite %}
               links:
                 - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
