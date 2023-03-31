@@ -61,7 +61,7 @@ spec:
       volumes:
       - name: inventory
         configMap:
-          name: ${{values.service}}-rhel-service-bind-inventory
+          name: ${{values.service}}-deployment-expose-inventory
           defaultMode: 420
       - name: ssh
         secret:
