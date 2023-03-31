@@ -21,7 +21,7 @@ spec:
           title: Host
           type: string
           description: The target RHEL Host IP/DNS Name
-        sitename:
+        service:
           title: Service Name
           type: string
           description: The unique name for the service in the skupper service
