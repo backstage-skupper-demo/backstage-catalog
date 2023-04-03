@@ -24,8 +24,6 @@ spec:
     name: ${{values.name}}
   tls:
     termination: edge
-    insecureEdgeTerminationPolicy: ''
-    destinationCACertificate: ''
   path: /
   port:
     targetPort: 8080

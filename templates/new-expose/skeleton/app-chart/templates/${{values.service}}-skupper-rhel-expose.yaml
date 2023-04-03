@@ -20,13 +20,13 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ${{values.service}}-deployment-expose
+  name: ${{values.service}}-skupper-rhel-expose
   namespace: backstage
 spec:
   selector: {}
   template:
     metadata:
-      name: ${{values.service}}-deployment-expose
+      name: ${{values.service}}-skupper-rhel-expose
     spec:
       serviceAccountName: pipeline
       containers:
