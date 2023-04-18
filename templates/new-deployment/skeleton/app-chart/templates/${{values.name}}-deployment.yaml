@@ -6,7 +6,7 @@ metadata:
   annotations:
     {% if values.skupper %}
     skupper.io/proxy: http
-    skupper.io/port: 8080
+    skupper.io/port: "8080"
     {% endif %}
 spec:
   selector:
