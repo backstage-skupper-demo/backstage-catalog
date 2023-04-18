@@ -34,11 +34,15 @@ kind: Job
 metadata:
   name: ${{values.sitename}}-skupper-site-init
   namespace: backstage
+  annotations:
+    backstage.io/kubernetes-id: skupper
 spec:
   selector: {}
   template:
     metadata:
       name: ${{values.sitename}}-skupper-site-init
+      annotations:
+        backstage.io/kubernetes-id: skupper
     spec:
       serviceAccountName: pipeline
       containers:
