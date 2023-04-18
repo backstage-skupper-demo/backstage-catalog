@@ -38,6 +38,9 @@ spec:
         skupper:
           title: Skupper Service
           description: Expose as a skupper service
+        route:
+          title: OpenShift Route
+          description: Expose with a route
   steps:
     - id: template-namespaces 
       name: Fetch Skeleton + Template
@@ -50,6 +53,7 @@ spec:
           name: ${{ parameters.name }}
           image: ${{ parameters.image }}
           skupper: ${{ parameters.skupper }}
+          route: ${{ parameters.route }}
 
     - id: pull-request
       name: make a pr with the new namespaces
