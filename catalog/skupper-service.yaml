@@ -3,6 +3,7 @@ kind: Component
 metadata:
   annotations:
     backstage.io/kubernetes-id: skupper
+    argocd/app-name: backstage-project-repo
   name: skupper
 spec:
   lifecycle: production
