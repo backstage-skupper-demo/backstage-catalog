@@ -37,9 +37,11 @@ spec:
           description: The location of the container image
         skupper:
           title: Skupper Service
+          type: boolean
           description: Expose as a skupper service
         route:
           title: OpenShift Route
+          type: boolean
           description: Expose with a route
   steps:
     - id: template-namespaces 
