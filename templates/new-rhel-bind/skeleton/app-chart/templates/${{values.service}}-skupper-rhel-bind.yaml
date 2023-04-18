@@ -26,14 +26,14 @@ kind: Job
 metadata:
   name: ${{values.service}}-rhel-service-bind
   namespace: backstage
-  annotations:
+  labels:
     backstage.io/kubernetes-id: skupper
 spec:
   selector: {}
   template:
     metadata:
       name: ${{values.service}}-rhel-service-bind
-      annotations:
+      labels:
         backstage.io/kubernetes-id: skupper
     spec:
       serviceAccountName: pipeline
