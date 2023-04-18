@@ -3,7 +3,11 @@ kind: Deployment
 metadata:
   namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
   name: ${{values.name}}
-  annotations: {}
+  annotations:
+    {% if values.skupper %}
+    skupper.io/proxy: http
+    skupper.io/port: 8080
+    {% endif %}
 spec:
   selector:
     matchLabels:

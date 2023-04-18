@@ -19,6 +19,8 @@ data:
                 enableServiceSync: 'true'
                 enableConsole: 'true'
                 enableFlowCollector: 'true'
+                annotations:
+                  - backstage.io/kubernetes-id=skupper
               {% if values.linkedsite %}
               links:
                 - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
