@@ -7,4 +7,4 @@ metadata:
 spec:
   type: skupper-site
   lifecycle: unknown
-  owner: Joshua Mathianas
+  owner: ${{values.owner | dump}}
