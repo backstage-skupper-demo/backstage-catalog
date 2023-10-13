@@ -72,6 +72,14 @@ spec:
         repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.sitename}}"
         repoVisibility: public
 
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog/${{parameters.sitename}}-skupper-site.yaml"
+
+
     - id: create-argocd-resources
       name: Create ArgoCD Resources
       action: argocd:create-resources
