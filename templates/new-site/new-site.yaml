@@ -20,11 +20,7 @@ spec:
           title: Project
           type: string
           description: The target OpenShift project
-          ui:field: OwnedEntityPicker
-          ui:options:
-            catalogFilter:
-              - 'spec.type':
-                  - ocp-project
+          default: "skupper"
         sitename:
           title: Site Name
           type: string
