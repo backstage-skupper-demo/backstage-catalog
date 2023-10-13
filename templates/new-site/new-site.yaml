@@ -34,6 +34,25 @@ spec:
             catalogFilter:
               - 'spec.type':
                   - skupper-site
+    - title: Application repository Information
+      required:
+        - repo
+      properties:
+        repo:
+          title: Repository Location
+          type: object
+          properties:
+            host:
+              title: Repo Host
+              type: string
+              description: Your SCM host
+            owner:
+              title: Repo Owner
+              type: string
+              description: Your SCM host organization/group
+              default: development
+              enum:
+                - development
   steps:
     - id: template-namespaces 
       name: Fetch Skeleton + Template
@@ -46,12 +65,11 @@ spec:
           sitename: ${{ parameters.sitename }}
           linkedsite: ${{ parameters.linkedsite }}
 
-    - id: pull-request
-      name: make a pr with the new namespaces
-      action: publish:github:pull-request
+    - id: publish
+      name: Publish
+      action: publish:gitlab
       input:
-        repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
-        branchName: ${{ parameters.sitename }}
-        title: skupper for ${{ parameters.sitename }}
-        description: skupper for ${{ parameters.sitename }}
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}"
+        repoVisibility: public
+
         
