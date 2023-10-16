@@ -45,12 +45,26 @@ spec:
           sitename: ${{ parameters.sitename }}
           linkedsite: ${{ parameters.linkedsite }}
 
-    - id: pull-request
-      name: make a pr with the new namespaces
-      action: publish:github:pull-request
+    - id: publish
+      name: Publish
+      action: publish:gitlab
       input:
-        repoUrl: github.com?repo=project-repo&owner=backstage-skupper-demo
-        branchName: ${{ parameters.sitename }}
-        title: skupper for ${{ parameters.sitename }}
-        description: skupper for ${{ parameters.sitename }}
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.sitename}}"
+        repoVisibility: public
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog/${{parameters.sitename}}-skupper-site.yaml"
         
+    - id: create-argocd-resources
+      name: Create ArgoCD Resources
+      action: argocd:create-resources
+      input:
+        appName: ${{ parameters.sitename }}-bootstrap
+        argoInstance: main
+        namespace: janus-argocd
+        repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.sitename }}.git
+        path: 'argo/'
