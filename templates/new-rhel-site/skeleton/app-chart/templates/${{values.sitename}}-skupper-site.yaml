@@ -9,6 +9,12 @@ data:
       children:
         local:
           hosts:
+            {% if values.linkedsite %}
+            ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}:
+              ansible_connection: local
+              token:
+                uses: 1
+            {% endif %}
             ${{values.host}}:
               platform: "podman"
               init:
@@ -22,12 +28,6 @@ data:
               {% endif %}
           vars:
             ansible_user: cloud-user
-        {% if values.linkedsite %}
-        linked:
-          hosts:
-            ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}:
-              ansible_connection: local
-        {% endif %}
 ---
 apiVersion: batch/v1
 kind: Job
