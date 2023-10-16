@@ -64,6 +64,7 @@ spec:
           host: ${{ parameters.host }}
           sitename: ${{ parameters.sitename }}
           linkedsite: ${{ parameters.linkedsite }}
+          destination: "https://${{ parameters.repo.host }}/development/${{parameters.sitename}}"
 
     - id: publish
       name: Publish
