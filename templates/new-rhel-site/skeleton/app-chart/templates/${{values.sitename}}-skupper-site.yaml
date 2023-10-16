@@ -2,7 +2,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: ${{values.sitename}}-inventory
-  namespace: backstage
+  namespace: skupper
 data:
   inventory.yml: |
     all:
@@ -11,6 +11,7 @@ data:
           hosts:
             {% if values.linkedsite %}
             ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}:
+              namespace: skupper
               ansible_connection: local
               token:
                 uses: 1
@@ -33,7 +34,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: ${{values.sitename}}-skupper-site-init
-  namespace: backstage
+  namespace: skupper
   labels:
     backstage.io/kubernetes-id: skupper
 spec:
