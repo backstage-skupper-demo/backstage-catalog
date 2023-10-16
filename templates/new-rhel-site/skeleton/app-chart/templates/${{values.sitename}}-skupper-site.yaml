@@ -37,7 +37,7 @@ data:
                   hostPorts:
                     - ${{values.port}}:${{values.port}}
           vars:
-            ansible_user: cloud-user
+            ansible_user: ec2-user
 ---
 apiVersion: batch/v1
 kind: Job

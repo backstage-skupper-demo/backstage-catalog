@@ -2,6 +2,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ${{values.sitename}}-skupper-site
+  annotations:
+    argocd/app-name: ${{ values.sitename }}-dev
 spec:
   type: skupper-site
   lifecycle: unknown
