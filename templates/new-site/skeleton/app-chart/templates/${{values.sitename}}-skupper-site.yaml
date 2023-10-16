@@ -3,3 +3,18 @@ apiVersion: v1
 metadata:
   name: skupper-site
   namespace: ${{values.project.replaceAll('component:default/','').replaceAll(r/-project$/g, '')}}
+data:
+  console-user: 'skupper'
+  enable-skupper-events: 'true'
+  router-mode: interior
+  name: skupper
+  console-authentication: internal
+  flow-collector: 'true'
+  cluster-permissions: 'false'
+  console-password: 'skupper'
+  service-sync: 'true'
+  router-console: 'true'
+  service-controller: 'true'
+  ingress: route
+  console: 'true'
+  router-logging: ''
