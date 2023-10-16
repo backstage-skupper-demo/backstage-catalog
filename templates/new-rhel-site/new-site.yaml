@@ -53,6 +53,14 @@ spec:
               default: development
               enum:
                 - development
+    - title: Exposed service
+      required:
+        - port
+      properties:
+        port:
+          title: Service Port
+          type: string
+          description: The service to port to expose on the skupper network
   steps:
     - id: template-namespaces 
       name: Fetch Skeleton + Template
@@ -65,6 +73,7 @@ spec:
           sitename: ${{ parameters.sitename }}
           linkedsite: ${{ parameters.linkedsite }}
           destination: "https://${{ parameters.repo.host }}/development/${{parameters.sitename}}"
+          port: ${{ parameters.port }}
 
     - id: publish
       name: Publish

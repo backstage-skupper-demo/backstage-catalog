@@ -27,6 +27,15 @@ data:
               links:
                 - host: ${{values.linkedsite.replaceAll('component:default/','').replaceAll(r/-skupper-site$/g, '')}}
               {% endif %}
+              services:
+                vmrest:
+                  ports: [${{values.port}}]
+                  targets:
+                    - type: "host"
+                      name: "${{values.host}}"
+                  hostIp: "${{values.host}}"
+                  hostPorts:
+                    - ${{values.port}}:${{values.port}}
           vars:
             ansible_user: cloud-user
 ---
