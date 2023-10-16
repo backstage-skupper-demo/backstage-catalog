@@ -62,16 +62,6 @@ spec:
           env:
             - name: ANSIBLE_HOST_KEY_CHECKING
               value: "False"
-            - name: VAULT_URL
-              valueFrom:
-                secretKeyRef:
-                  name: vault-secret
-                  key: vault-url
-            - name: VAULT_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: vault-secret
-                  key: vault-token
       volumes:
       - name: inventory
         configMap:
