@@ -33,17 +33,6 @@ spec:
             catalogFilter:
               - 'spec.type':
                   - skupper-site
-  steps:
-    - id: template-namespaces 
-      name: Fetch Skeleton + Template
-      action: fetch:template
-      input:
-        url: ./skeleton
-        copyWithoutRender: []
-        values:
-          host: ${{ parameters.host }}
-          sitename: ${{ parameters.sitename }}
-          linkedsite: ${{ parameters.linkedsite }}
 
     - title: Application repository Information
       required:
@@ -64,6 +53,17 @@ spec:
               default: development
               enum:
                 - development
+  steps:
+    - id: template-namespaces 
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        copyWithoutRender: []
+        values:
+          host: ${{ parameters.host }}
+          sitename: ${{ parameters.sitename }}
+          linkedsite: ${{ parameters.linkedsite }}
 
     - id: publish
       name: Publish
