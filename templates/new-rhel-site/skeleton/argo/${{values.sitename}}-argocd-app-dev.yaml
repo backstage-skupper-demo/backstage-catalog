@@ -20,6 +20,8 @@ spec:
         value: dev
       - name: image.tag
         value: latest
+      - name: values.ansible.image
+        value: quay.io/mathianasj/ansible-skupper-pipeline:latest
   destination:
     server: https://kubernetes.default.svc
     namespace: ${{ values.sitename }}
