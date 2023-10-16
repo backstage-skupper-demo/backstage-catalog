@@ -65,6 +65,7 @@ spec:
           sitename: ${{ parameters.sitename }}
           linkedsite: ${{ parameters.linkedsite }}
           destination: "https://${{ parameters.repo.host }}/development/${{parameters.sitename}}"
+          owner: ${{ parameters.repo.owner }}
 
     - id: publish
       name: Publish
