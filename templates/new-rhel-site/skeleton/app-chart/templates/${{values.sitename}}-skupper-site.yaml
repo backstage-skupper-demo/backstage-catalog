@@ -15,11 +15,15 @@ data:
               ansible_connection: local
               token:
                 uses: 1
+              services:
+                vmrest:
+                  ports: [${{values.port}}]
             {% endif %}
             ${{values.host}}:
               platform: "podman"
               init:
                 siteName: ${{values.sitename}}
+                ingress: none
                 ingressHosts:
                   - ${{values.host}}
                 enableServiceSync: 'true'
@@ -33,9 +37,6 @@ data:
                   targets:
                     - type: "host"
                       name: "${{values.host}}"
-                  hostIp: "${{values.host}}"
-                  hostPorts:
-                    - ${{values.port}}:${{values.port}}
           vars:
             ansible_user: ec2-user
 ---
