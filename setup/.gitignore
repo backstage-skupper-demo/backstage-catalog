@@ -1,0 +1,9 @@
+.env
+.terraform*
+terraform.*
+.terraform
+bin
+glab
+*.tar.gz
+private_key
+vm_ip

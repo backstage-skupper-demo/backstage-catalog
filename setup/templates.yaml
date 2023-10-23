@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: software-templates
+  description: A collection of Backstage templates for Janus-IDP Backstage
+spec:
+  type: url
+  targets:
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/go-backend-template/template.yaml
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/nodejs-backend-template/template.yaml
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/python-backend-template/template.yaml
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/dotnet-frontend-template/template.yaml
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/spring-boot-backend-template/template.yaml
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/quarkus-backend-template/template.yaml
+     - https://gitlab-gitlab.apps.cluster-swg7x.sandbox770.opentlc.com/rhdh/software-templates/blob/main/scaffolder-templates/quarkus-web-template/template.yaml
+     - https://github.com/backstage-skupper-demo/backstage-catalog/tree/summit-connect/templates/new-site/new-site.yaml
+     - https://github.com/backstage-skupper-demo/backstage-catalog/tree/summit-connect/templates/new-rhel-site/new-site.yaml
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/argocd-template/template.yaml
+#    - https://github.com/janus-idp/software-templates/blob/main/scaffolder-templates/ansible-job/template.yaml
